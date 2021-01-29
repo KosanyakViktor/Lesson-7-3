@@ -1,35 +1,20 @@
-import React, { Component } from 'react';
-import Message from './Message';
+import React from 'react';
+import moment from 'moment';
 
-const text1 = 'Hello, world!';
-const text2 = 'Another exciting text.';
+const Transaction = ({ from, to, amount, rate, time }) => {
+  const formatDate = moment(time).format('DD MMM');
+  const formatTime = moment(time).format('HH:mm');
+  const formatAmount = new Intl.NumberFormat('en-GB').format(amount)
+ 
+  return (
+    <li className="transaction">
+      <span className="transaction__date">{formatDate}</span>
+      <span className="transaction__time">{formatTime}</span>
+      <span className="transaction__assets">{from} → {to}</span>
+      <span className="transaction__rate">{rate}</span>
+      <span className="transaction__amount">{formatAmount}</span>
+    </li>
+  ) 
+}
 
-class Page extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: null
-    };
-  }
-
-  setText = text => {
-    this.setState({
-      text
-    });
-  };
-
-  render() {
-    return (
-      <div className="page">
-        <Message text={this.state.text}/>
-        <div className="actions">
-          <button className="btn" onClick={() => this.setText(text1)}>Text 1</button>
-          <button className="btn" onClick={() => this.setText(text2)}>Text 2</button>
-          <button className="btn" onClick={() => this.setText('')}>Clear</button>
-        </div>
-      </div>
-    );
-  }
-};
-
-export default Page;
+export default Transaction;

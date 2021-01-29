@@ -1,15 +1,13 @@
 import React from 'react';
+import Transaction from './Transaction';
 
-const Message = ({ text }) => {
-  if (!text) {
-    return null;
-  }
-  
-  return (
-    <div className="message">
-      {text}
-    </div>
+const TransactionsList = ({ transactions }) =>(
+    <ul className="transactions">
+      {transactions.map(transaction => (
+        <Transaction key={transaction.id} {...transaction} />
+      ))}
+    </ul>
   );
-};
 
-export default Message;
+
+export default TransactionsList;
